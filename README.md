@@ -1,2 +1,2 @@
 # FIT3142
-# FIT3142
+This Repository contains weekly labs for FIT3142
