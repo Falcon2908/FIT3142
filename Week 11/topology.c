@@ -2,6 +2,7 @@
 #include <mpi.h>
 
 int main(int argc, char** argv) {
+    double start, finish;
     int rank, size, value = 0, reorder = 0;
     int right_n, left_n;
 
@@ -9,6 +10,7 @@ int main(int argc, char** argv) {
     MPI_Status status;
 
     MPI_Init(NULL, NULL);
+    start = MPI_Wtime();
     MPI_Comm_size(MPI_COMM_WORLD , &size);
     MPI_Cart_create(MPI_COMM_WORLD, 1, &size, &reorder, 1, &ring);
     MPI_Cart_shift(ring, 0, 1, &left_n, &right_n);
@@ -29,6 +31,8 @@ int main(int argc, char** argv) {
 
         printf("Process %d of %d recieved %d\n", rank, size, value);
     } 
+    finish = MPI_Wtime();
     MPI_Finalize();
+    printf("Parallel Elapsed time: %f seconds\n", finish-start);
     return 0;
 }

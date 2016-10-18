@@ -2,10 +2,12 @@
 #include <mpi.h>
 
 int main(int argc, char** argv) {
+    double start, finish;
     int rank, value = 0, size;
     MPI_Status status;
 
     MPI_Init(NULL, NULL);
+    start = MPI_Wtime();
 
     MPI_Comm_rank(MPI_COMM_WORLD, &rank);
     MPI_Comm_size(MPI_COMM_WORLD, &size);
@@ -24,6 +26,7 @@ int main(int argc, char** argv) {
 
         printf("Process %d of %d recieved %d\n", rank, size, value);
     } 
+    finish = MPI_Wtime();
     MPI_Finalize();
-    return 0;
+    printf("Parallel Elapsed time: %f seconds\n", finish-start);
 }
