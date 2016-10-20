@@ -1,0 +1,9 @@
+#!/bin/sh
+#$ -N fairness
+#$ -l h_vmem=1G
+#$ -l h_rt=1:00:00
+#$ -pe orte_adv 4
+#$ -cwd
+
+module load openmpi/1.8.4-gcc-4.8.0
+mpirun fairness
